@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "RootNav.h"
+#import "dataBase.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +18,14 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    RootNav *rootNav=[[RootNav alloc] init];
+    self.window.rootViewController = rootNav;
+    
+    
+    
+    
+    
+    
     return YES;
 }
 
