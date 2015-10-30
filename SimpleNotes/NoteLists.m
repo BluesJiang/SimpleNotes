@@ -253,29 +253,36 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 
 // SearchBar Delegate
 
-//- (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-//{
-//    for(int i=0;i<_dataBase.totalData.count;i++)
-//    {
-//        NSDictionary *dic = [_dataBase.totalData objectAtIndex:i];
-//        NSRange range1,range2;
-//        range1 = [[dic objectForKey:@"title"] rangeOfString:searchText];
-//        range2 = [[dic objectForKey:@"content"] rangeOfString:searchText];
-//        if(range1.location == NSNotFound && range2.location == NSNotFound)
-//        {
-//            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-//            [_noteLists deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationNone];
-//        }
-//        
-//    }
-//}
+- (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    _searchStatus = YES;
+    if([searchBar.text isEqualToString:@""]) _searchStatus = NO;
+    if(_searchList !=nil) {[_searchList removeAllObjects];_searchList = nil;}
+    _searchList = [[NSMutableArray alloc] init];
+
+    for(int i=0;i<_dataBase.totalData.count;i++)
+    {
+        NSDictionary *dic = [_dataBase.totalData objectAtIndex:i];
+        NSRange range1,range2;
+        range1 = [[dic objectForKey:@"title"] rangeOfString:searchText];
+        range2 = [[dic objectForKey:@"content"] rangeOfString:searchText];
+        if(!(range1.location == NSNotFound && range2.location == NSNotFound))
+        {
+          //  NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+         //   [_noteLists deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationNone];
+            [_searchList addObject:[_dataBase.totalData objectAtIndex:i]];
+        }
+        
+    }
+    NSLog(@"%@",_dataBase.totalData);
+    [_noteLists reloadData];
+}
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     [searchBar setShowsCancelButton:YES animated:YES];
     _searchStatus = YES;
-    _searchList = [[NSMutableArray alloc] init];
-    [_noteLists reloadData];
+   // [_noteLists reloadData];
 }
 
 
@@ -284,34 +291,40 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     [searchBar setShowsCancelButton:NO animated:YES];
     [searchBar resignFirstResponder];
     _searchStatus = NO;
+    if(![searchBar.text isEqualToString:@""])
+    {
+        
+        [_noteLists reloadData];
+
+    }
     searchBar.text = @"";
-    [_noteLists reloadData];
+    
 }
 
 - (void) searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     [searchBar resignFirstResponder];
-    if([searchBar.text isEqualToString:@""]) _searchStatus = NO;
-    
-    if(_searchStatus)
-    {
-        if(_searchList!=nil){[_searchList removeAllObjects]; _searchList = nil;}
-        _searchList = [[NSMutableArray alloc] init];
-        
-        for(int i=0;i<_dataBase.totalData.count;i++)
-        {
-            NSDictionary *dic = [_dataBase.totalData objectAtIndex:i];
-            NSRange range1,range2;
-            range1 = [[dic objectForKey:@"title"] rangeOfString:searchBar.text];
-            range2 = [[dic objectForKey:@"content"] rangeOfString:searchBar.text];
-            if(!(range1.location == NSNotFound && range2.location == NSNotFound))
-            {
-                [_searchList addObject:[_dataBase.totalData objectAtIndex:i]];
-            }
-            
-        }
-        [_noteLists reloadData];
-    }
+//    if([searchBar.text isEqualToString:@""]) _searchStatus = NO;
+//    
+//    if(_searchStatus)
+//    {
+//        if(_searchList!=nil){[_searchList removeAllObjects]; _searchList = nil;}
+//        _searchList = [[NSMutableArray alloc] init];
+//        
+//        for(int i=0;i<_dataBase.totalData.count;i++)
+//        {
+//            NSDictionary *dic = [_dataBase.totalData objectAtIndex:i];
+//            NSRange range1,range2;
+//            range1 = [[dic objectForKey:@"title"] rangeOfString:searchBar.text];
+//            range2 = [[dic objectForKey:@"content"] rangeOfString:searchBar.text];
+//            if(!(range1.location == NSNotFound && range2.location == NSNotFound))
+//            {
+//                [_searchList addObject:[_dataBase.totalData objectAtIndex:i]];
+//            }
+//            
+//        }
+//        [_noteLists reloadData];
+//    }
     
 
     
