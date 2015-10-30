@@ -13,7 +13,7 @@
     
 }
 
-@property BOOL addButtonPushed;
+@property BOOL trashButtonPushed;
 @property NSInteger numberOfRow;
 @property UISearchBar *searchBar;
 @property NSMutableArray *searchList;
@@ -54,13 +54,18 @@
     [_noteLists setDataSource:self];
     UIBarButtonItem * addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(rightTopButtonPushed)];
     self.navigationItem.rightBarButtonItem = addButton;
+    UIBarButtonItem * trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self  action:@selector(trashButtonPushed)];
+    self.navigationItem.leftBarButtonItem = trashButton;
+    UIView * newFooterView = [[UIView alloc] initWithFrame:self.view.frame];
+    newFooterView.backgroundColor = [UIColor whiteColor];
+    _noteLists.tableFooterView = newFooterView;
     
     [self.view addSubview:_noteLists];
     self.numberOfRow = 20;
     
     
     _searchStatus = NO;
-    _addButtonPushed = NO;
+    _trashButtonPushed = NO;
     NSLog(@"%@",self.navigationController);
     
     
@@ -150,24 +155,39 @@
         //NSLog(@"%@",self.navigationController);
     [self.navigationController pushViewController:newTex animated:YES];
     
-        
-        
-        
+    
     
 }
+
+- (void) trashButtonPushed
+{
+    [_noteLists setEditing:YES animated:YES];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPushed)];
+    self.navigationItem.rightBarButtonItem = doneButton;
+    
+}
+
+- (void) doneButtonPushed
+{
+    [_noteLists setEditing:NO animated:YES];
+    UIBarButtonItem * addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(rightTopButtonPushed)];
+    self.navigationItem.rightBarButtonItem = addButton;
+
+    
+}
+
 
 - (UITableViewCellEditingStyle) tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if(_addButtonPushed)
-    { return UITableViewCellEditingStyleInsert;}
-    else return UITableViewCellEditingStyleDelete;
+    return UITableViewCellEditingStyleDelete;
 }
 
 
 
 
 //Delegate Methol
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 60;

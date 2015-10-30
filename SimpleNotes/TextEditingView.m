@@ -183,6 +183,7 @@
         
         //if([_titleTextView.text isEqualToString:@""])_titleTextView = @""
         //NSDictionary *dic = [[NSDictionary alloc] initWithObjects:  [NSArray arrayWithObjects:[NSNumber numberWithInt:_flag],[NSString stringWithFormat:@"%@",_titleTextView.text],textView.text,nil] forKeys: @[@"flag",@"title",@"content"]];
+        
         [_dataBase.totalData insertObject:(NSDictionary*)_currentData atIndex:_flag>=0?_flag:0];
         // NSString *path = [[NSBundle mainBundle] pathForResource:@"NotesData" ofType:@"plist"];
         //BOOL success = [_dataBase.totalData writeToFile:path atomically:YES];
