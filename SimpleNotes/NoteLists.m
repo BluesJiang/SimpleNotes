@@ -7,6 +7,8 @@
 //
 
 #import "NoteLists.h"
+#define MyColor1 [[UIColor alloc] initWithRed:(219.0/255) green:213.0/255 blue:188.0/255 alpha:1]
+#define MyColor2 [[UIColor alloc] initWithRed:(210.0/255) green:192.0/255 blue:122.0/255 alpha:1]
 
 @interface NoteLists ()
 {
@@ -27,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadData];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.tintColor = MyColor1;
     self.title = @"Notes List";
     
    // _searchDisplayController = [[UISearchDisplayController alloc] initWithSearchBar:_searchBar  contentsController:_noteLists];
@@ -48,7 +50,7 @@
     
     
     _noteLists = [[UITableView alloc] initWithFrame:CGRectMake(0, _searchBar.frame.origin.y+_searchBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
-    
+    _noteLists.backgroundColor = MyColor2;
     
     [_noteLists setDelegate:self];
     [_noteLists setDataSource:self];
@@ -56,10 +58,14 @@
     self.navigationItem.rightBarButtonItem = addButton;
     UIBarButtonItem * trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self  action:@selector(trashButtonPushed)];
     self.navigationItem.leftBarButtonItem = trashButton;
-    UIView * newFooterView = [[UIView alloc] initWithFrame:self.view.frame];
-    newFooterView.backgroundColor = [UIColor whiteColor];
+    CGRect theRect = self.view.frame;
+    theRect.size.height -= 60*3;
+    UIView * newFooterView = [[UIView alloc] initWithFrame:theRect];
+    newFooterView.backgroundColor = MyColor1;
+  //  newFooterView.backgroundColor = [UIColor whiteColor];
     _noteLists.tableFooterView = newFooterView;
     
+    self.navigationController.navigationBar.backgroundColor = MyColor1;
     [self.view addSubview:_noteLists];
     self.numberOfRow = 20;
     
@@ -103,6 +109,10 @@
         
     }
     NSInteger row = [indexPath row];
+    if(row%2 == 1)
+        cell.backgroundColor = MyColor1;
+    else
+        cell.backgroundColor = MyColor2;
     if(_searchStatus)
     {
         cell.textLabel.text = [NSString stringWithFormat:@"%@",[[_searchList objectAtIndex:row] objectForKey:@"title"]];
@@ -253,29 +263,37 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 
 // SearchBar Delegate
 
-//- (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-//{
-//    for(int i=0;i<_dataBase.totalData.count;i++)
-//    {
-//        NSDictionary *dic = [_dataBase.totalData objectAtIndex:i];
-//        NSRange range1,range2;
-//        range1 = [[dic objectForKey:@"title"] rangeOfString:searchText];
-//        range2 = [[dic objectForKey:@"content"] rangeOfString:searchText];
-//        if(range1.location == NSNotFound && range2.location == NSNotFound)
-//        {
-//            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-//            [_noteLists deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationNone];
-//        }
-//        
-//    }
-//}
+- (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    _searchStatus = YES;
+    if(_searchList){[_searchList removeAllObjects];_searchList = nil;}
+    if([searchText isEqualToString:@""])_searchStatus = NO;
+    if(_searchStatus)
+    {
+        _searchList= [[NSMutableArray alloc] init];
+        for(int i=0;i<_dataBase.totalData.count;i++)
+        {
+            NSDictionary *dic = [_dataBase.totalData objectAtIndex:i];
+            NSRange range1,range2;
+            range1 = [[dic objectForKey:@"title"] rangeOfString:searchText];
+            range2 = [[dic objectForKey:@"content"] rangeOfString:searchText];
+            if(!(range1.location == NSNotFound && range2.location == NSNotFound))
+            {
+                [_searchList addObject:[_dataBase.totalData objectAtIndex:i]];
+            }
+            
+        }
+ 
+    }
+    
+    [_noteLists reloadData];
+}
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     [searchBar setShowsCancelButton:YES animated:YES];
     _searchStatus = YES;
-    _searchList = [[NSMutableArray alloc] init];
-    [_noteLists reloadData];
+    // [_noteLists reloadData];
 }
 
 
@@ -284,8 +302,12 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     [searchBar setShowsCancelButton:NO animated:YES];
     [searchBar resignFirstResponder];
     _searchStatus = NO;
-    searchBar.text = @"";
-    [_noteLists reloadData];
+    if(![searchBar.text isEqualToString:@""])
+    {
+        [_noteLists reloadData];
+        searchBar.text = @"";
+    }
+    
 }
 
 - (void) searchBarSearchButtonClicked:(UISearchBar *)searchBar
@@ -293,25 +315,6 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     [searchBar resignFirstResponder];
     if([searchBar.text isEqualToString:@""]) _searchStatus = NO;
     
-    if(_searchStatus)
-    {
-        if(_searchList!=nil){[_searchList removeAllObjects]; _searchList = nil;}
-        _searchList = [[NSMutableArray alloc] init];
-        
-        for(int i=0;i<_dataBase.totalData.count;i++)
-        {
-            NSDictionary *dic = [_dataBase.totalData objectAtIndex:i];
-            NSRange range1,range2;
-            range1 = [[dic objectForKey:@"title"] rangeOfString:searchBar.text];
-            range2 = [[dic objectForKey:@"content"] rangeOfString:searchBar.text];
-            if(!(range1.location == NSNotFound && range2.location == NSNotFound))
-            {
-                [_searchList addObject:[_dataBase.totalData objectAtIndex:i]];
-            }
-            
-        }
-        [_noteLists reloadData];
-    }
     
 
     

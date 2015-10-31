@@ -7,6 +7,8 @@
 //
 
 #import "TextEditingView.h"
+#define MyColor1 [[UIColor alloc] initWithRed:(219.0/255) green:213.0/255 blue:188.0/255 alpha:1]
+#define MyColor2 [[UIColor alloc] initWithRed:(210.0/255) green:192.0/255 blue:122.0/255 alpha:1]
 
 @interface TextEditingView ()
 {
@@ -65,7 +67,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = MyColor1;
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(finishedEditing)];
     self.navigationItem.rightBarButtonItem = doneButton;
     
@@ -76,13 +78,18 @@
     _titleTextView = [[UITextField alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, [[UIApplication sharedApplication] statusBarFrame].size.height+self.view.frame.origin.y+self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, 60)];
         _titleTextView.placeholder = @"请输入标题";
     _titleTextView.borderStyle = UITextBorderStyleRoundedRect;
+    _titleTextView.backgroundColor = MyColor2;
     _titleTextView.delegate = self;
     [self.view addSubview:_titleTextView];
     
     
     _mainTextView = [[UITextView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x,_titleTextView.frame.size.height+_titleTextView.frame.origin.y, self.view.bounds.size.width, self.view.frame.size.height-_titleTextView.frame.size.height)];
+    _mainTextView.backgroundColor = MyColor1;
     _mainTextView.delegate = self;
     [self.view addSubview:_mainTextView];
+    
+    
+    
     
     
    // NSString *path = [[NSBundle mainBundle] pathForResource:@"NotesData" ofType:@"plist"];
@@ -104,6 +111,9 @@
     
     
     _contentChanged = NO;
+    
+    
+    
     //[self registerForKeyboardNotification];
     
     
