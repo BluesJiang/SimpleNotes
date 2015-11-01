@@ -30,6 +30,7 @@
     if(self = [super init])
         _flag = flag;
     return self;
+    
 }
 
 
@@ -86,6 +87,9 @@
     _mainTextView = [[UITextView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x,_titleTextView.frame.size.height+_titleTextView.frame.origin.y, self.view.bounds.size.width, self.view.frame.size.height-_titleTextView.frame.size.height)];
     _mainTextView.backgroundColor = MyColor1;
     _mainTextView.delegate = self;
+    _mainTextView.font = [UIFont fontWithName:@"ArialRoundedMTBold" size:25];
+    
+    
     [self.view addSubview:_mainTextView];
     
     
@@ -190,11 +194,14 @@
     {
         if(_flag>=0)
             [_dataBase.totalData removeObjectAtIndex:_flag];
+        NSDate *date = [NSDate date];
+        [_currentData setObject:date forKey:@"time"];
+        
         
         //if([_titleTextView.text isEqualToString:@""])_titleTextView = @""
         //NSDictionary *dic = [[NSDictionary alloc] initWithObjects:  [NSArray arrayWithObjects:[NSNumber numberWithInt:_flag],[NSString stringWithFormat:@"%@",_titleTextView.text],textView.text,nil] forKeys: @[@"flag",@"title",@"content"]];
         
-        [_dataBase.totalData insertObject:(NSDictionary*)_currentData atIndex:_flag>=0?_flag:0];
+        [_dataBase.totalData insertObject:(NSDictionary*)_currentData atIndex:0];
         // NSString *path = [[NSBundle mainBundle] pathForResource:@"NotesData" ofType:@"plist"];
         //BOOL success = [_dataBase.totalData writeToFile:path atomically:YES];
         //NSLog(@"%d",success);

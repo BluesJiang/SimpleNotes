@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TextEditingView.h"
 #import "dataBase.h"
+#import "NoteListsCell.h"
 
 
 @interface NoteLists : UIViewController <UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchDisplayDelegate>

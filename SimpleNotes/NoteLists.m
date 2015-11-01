@@ -34,7 +34,7 @@
     
    // _searchDisplayController = [[UISearchDisplayController alloc] initWithSearchBar:_searchBar  contentsController:_noteLists];
     
-    
+    //设置搜索栏
     
     _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, [[UIApplication sharedApplication] statusBarFrame].size.height+self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, 45)];
     [self.view addSubview:_searchBar];
@@ -47,29 +47,34 @@
     _searchBar.delegate = self;
     
     
-    
+    //设置表单
     
     _noteLists = [[UITableView alloc] initWithFrame:CGRectMake(0, _searchBar.frame.origin.y+_searchBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
     _noteLists.backgroundColor = MyColor2;
     
     [_noteLists setDelegate:self];
     [_noteLists setDataSource:self];
+    CGRect theRect = self.view.frame;
+    theRect.size.height -= 60*3;
+    UIView * newFooterView = [[UIView alloc] initWithFrame:self.view.frame];
+    newFooterView.backgroundColor = MyColor1;
+    //  newFooterView.backgroundColor = [UIColor whiteColor];
+    _noteLists.tableFooterView = newFooterView;
+    
+    //设置导航栏
+    
     UIBarButtonItem * addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(rightTopButtonPushed)];
     self.navigationItem.rightBarButtonItem = addButton;
     UIBarButtonItem * trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self  action:@selector(trashButtonPushed)];
     self.navigationItem.leftBarButtonItem = trashButton;
-    CGRect theRect = self.view.frame;
-    theRect.size.height -= 60*3;
-    UIView * newFooterView = [[UIView alloc] initWithFrame:theRect];
-    newFooterView.backgroundColor = MyColor1;
-  //  newFooterView.backgroundColor = [UIColor whiteColor];
-    _noteLists.tableFooterView = newFooterView;
+    
+    
     
     self.navigationController.navigationBar.backgroundColor = MyColor1;
     [self.view addSubview:_noteLists];
     self.numberOfRow = 20;
     
-    
+    //内容初始化
     _searchStatus = NO;
     _trashButtonPushed = NO;
     NSLog(@"%@",self.navigationController);
@@ -101,11 +106,13 @@
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString * dequeueID = @"NotesTitle";
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:dequeueID];
+    NoteListsCell * cell = [tableView dequeueReusableCellWithIdentifier:dequeueID];
     
     if(cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:dequeueID];
+        cell = [[NoteListsCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:dequeueID];
+        
+        
         
     }
     NSInteger row = [indexPath row];
@@ -115,20 +122,11 @@
         cell.backgroundColor = MyColor2;
     if(_searchStatus)
     {
-        cell.textLabel.text = [NSString stringWithFormat:@"%@",[[_searchList objectAtIndex:row] objectForKey:@"title"]];
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[[_searchList objectAtIndex:row] objectForKey:@"content"]];
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-
+        [cell setContent:_searchList forRow:row];
     }
     else
     {
-        
-        cell.textLabel.text = [NSString stringWithFormat:@"%@",[[_dataBase.totalData objectAtIndex:row] objectForKey:@"title"]];
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[[_dataBase.totalData objectAtIndex:row] objectForKey:@"content"]];
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        
+        [cell setContent:_dataBase.totalData forRow:row];
     }
     NSLog(@"I Creat the number %d row\n",(int)row);
         
