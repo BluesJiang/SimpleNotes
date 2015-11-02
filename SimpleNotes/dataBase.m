@@ -45,12 +45,7 @@ static dataBase * singleDataBase;
 
     
     
-//    if ([fileManager fileExistsAtPath:fileName]) {
-//        _totalData = [NSMutableArray arrayWithContentsOfFile:fileName];
-//    } else {
-//            }
-//    
-    
+
     
 }
 
@@ -65,7 +60,7 @@ static dataBase * singleDataBase;
     NSString *fileName = [path stringByAppendingPathComponent:@"Documents/Notes.plist"];
 
     NSLog(@"%@",fileName);
-    BOOL success = [_totalData writeToFile:fileName atomically:YES];
+    [_totalData writeToFile:fileName atomically:YES];
 }
 
 

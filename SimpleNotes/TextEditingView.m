@@ -8,8 +8,7 @@
 
 #import "TextEditingView.h"
 #define MyColor1 [[UIColor alloc] initWithRed:(219.0/255) green:213.0/255 blue:188.0/255 alpha:1]
-#define MyColor2 [[UIColor alloc] initWithRed:(210.0/255) green:192.0/255 blue:122.0/255 alpha:1]
-
+#define MyColor2 [[UIColor alloc] initWithRed:(211.0/255) green:208.0/255 blue:172.0/255 alpha:1]
 @interface TextEditingView ()
 {
     UITextView* _mainTextView;
@@ -43,7 +42,7 @@
     if(_keyboardShown)
         return;
     NSDictionary* info = [aNotification userInfo];
-    NSValue* aValue = [info objectForKey:UIKeyboardBoundsUserInfoKey];
+    NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey ];
     CGSize keyboardSize = [aValue CGRectValue].size;
     CGRect mainTextviewFrame = _mainTextView.frame;
     mainTextviewFrame.size.height -= (keyboardSize.height*7/5);
@@ -55,7 +54,7 @@
 
 - (void) keyboardWasHidden:(NSNotification*) aNotification{
     NSDictionary *info = [aNotification userInfo];
-    NSValue* aValue = [info objectForKey:UIKeyboardBoundsUserInfoKey];
+    NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey ];
     CGSize keyboardSize = [aValue CGRectValue].size;
     CGRect mainTextViewFrame = _mainTextView.frame;
     mainTextViewFrame.size.height += (keyboardSize.height*7/5);
@@ -68,6 +67,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self registerForKeyboardNotification];
     self.view.backgroundColor = MyColor1;
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(finishedEditing)];
     self.navigationItem.rightBarButtonItem = doneButton;
@@ -81,13 +81,14 @@
     _titleTextView.borderStyle = UITextBorderStyleRoundedRect;
     _titleTextView.backgroundColor = MyColor2;
     _titleTextView.delegate = self;
+    _titleTextView.font = [UIFont fontWithName:@"AppleGothic" size:25];
     [self.view addSubview:_titleTextView];
     
     
     _mainTextView = [[UITextView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x,_titleTextView.frame.size.height+_titleTextView.frame.origin.y, self.view.bounds.size.width, self.view.frame.size.height-_titleTextView.frame.size.height)];
     _mainTextView.backgroundColor = MyColor1;
     _mainTextView.delegate = self;
-    _mainTextView.font = [UIFont fontWithName:@"ArialRoundedMTBold" size:25];
+    _mainTextView.font = [UIFont fontWithName:@"AppleGothic" size:19];
     
     
     [self.view addSubview:_mainTextView];

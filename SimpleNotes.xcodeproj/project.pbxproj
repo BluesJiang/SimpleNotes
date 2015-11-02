@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6F1720AA1BDBA7C800D36D89 /* NotesData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F1720A91BDBA7C800D36D89 /* NotesData.plist */; };
-		6F1720AD1BDBB42200D36D89 /* TextEditingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1720AC1BDBB42200D36D89 /* TextEditingView.m */; };
+		6F52F26C1BE4AC430055DF9E /* TextEditingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F52F26B1BE4AC430055DF9E /* TextEditingView.m */; };
 		6F7992AF1BDB2AB60028B227 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7992AE1BDB2AB60028B227 /* main.m */; };
 		6F7992B21BDB2AB60028B227 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7992B11BDB2AB60028B227 /* AppDelegate.m */; };
 		6F7992B51BDB2AB60028B227 /* SimpleNotes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6F7992B31BDB2AB60028B227 /* SimpleNotes.xcdatamodeld */; };
@@ -19,6 +19,7 @@
 		6F7992DD1BDB2DCE0028B227 /* RootNav.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7992DC1BDB2DCE0028B227 /* RootNav.m */; };
 		6F7992E01BDB2E150028B227 /* NoteLists.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7992DF1BDB2E150028B227 /* NoteLists.m */; };
 		6F9056641BDFA226000A6840 /* dataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9056631BDFA226000A6840 /* dataBase.m */; };
+		6FE11BEC1BE5B526007A5C76 /* NoteListsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE11BEB1BE5B526007A5C76 /* NoteListsCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,8 +34,8 @@
 
 /* Begin PBXFileReference section */
 		6F1720A91BDBA7C800D36D89 /* NotesData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = NotesData.plist; sourceTree = "<group>"; };
-		6F1720AB1BDBB42200D36D89 /* TextEditingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextEditingView.h; path = SimpleNotes.xcodeproj/../TextEditingView.h; sourceTree = SOURCE_ROOT; };
-		6F1720AC1BDBB42200D36D89 /* TextEditingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TextEditingView.m; path = SimpleNotes.xcodeproj/../TextEditingView.m; sourceTree = SOURCE_ROOT; };
+		6F52F26A1BE4AC430055DF9E /* TextEditingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextEditingView.h; sourceTree = "<group>"; };
+		6F52F26B1BE4AC430055DF9E /* TextEditingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextEditingView.m; sourceTree = "<group>"; };
 		6F7992A91BDB2AB60028B227 /* SimpleNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F7992AD1BDB2AB60028B227 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F7992AE1BDB2AB60028B227 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -53,6 +54,8 @@
 		6F7992DF1BDB2E150028B227 /* NoteLists.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteLists.m; sourceTree = "<group>"; };
 		6F9056621BDFA226000A6840 /* dataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dataBase.h; path = SimpleNotes.xcodeproj/../SimpleNotes/dataBase.h; sourceTree = "<group>"; };
 		6F9056631BDFA226000A6840 /* dataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = dataBase.m; path = SimpleNotes.xcodeproj/../SimpleNotes/dataBase.m; sourceTree = "<group>"; };
+		6FE11BEA1BE5B526007A5C76 /* NoteListsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteListsCell.h; sourceTree = "<group>"; };
+		6FE11BEB1BE5B526007A5C76 /* NoteListsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteListsCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,12 +98,14 @@
 		6F7992AB1BDB2AB60028B227 /* SimpleNotes */ = {
 			isa = PBXGroup;
 			children = (
-				6F1720AB1BDBB42200D36D89 /* TextEditingView.h */,
-				6F1720AC1BDBB42200D36D89 /* TextEditingView.m */,
 				6F7992B01BDB2AB60028B227 /* AppDelegate.h */,
 				6F7992B11BDB2AB60028B227 /* AppDelegate.m */,
 				6F7992DE1BDB2E150028B227 /* NoteLists.h */,
 				6F7992DF1BDB2E150028B227 /* NoteLists.m */,
+				6FE11BEA1BE5B526007A5C76 /* NoteListsCell.h */,
+				6FE11BEB1BE5B526007A5C76 /* NoteListsCell.m */,
+				6F52F26A1BE4AC430055DF9E /* TextEditingView.h */,
+				6F52F26B1BE4AC430055DF9E /* TextEditingView.m */,
 				6F7992DB1BDB2DCE0028B227 /* RootNav.h */,
 				6F7992DC1BDB2DCE0028B227 /* RootNav.m */,
 				6F7992B91BDB2AB60028B227 /* Main.storyboard */,
@@ -115,6 +120,7 @@
 		6F7992AC1BDB2AB60028B227 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6FE11BED1BE6268C007A5C76 /* icon */,
 				6F7992AD1BDB2AB60028B227 /* Info.plist */,
 				6F7992AE1BDB2AB60028B227 /* main.m */,
 				6F1720A91BDBA7C800D36D89 /* NotesData.plist */,
@@ -146,6 +152,13 @@
 				6F9056631BDFA226000A6840 /* dataBase.m */,
 			);
 			name = dataBase;
+			sourceTree = "<group>";
+		};
+		6FE11BED1BE6268C007A5C76 /* icon */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = icon;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,7 +205,7 @@
 		6F7992A11BDB2AB60028B227 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = BluesJiang;
 				TargetAttributes = {
 					6F7992A81BDB2AB60028B227 = {
@@ -252,11 +265,12 @@
 			files = (
 				6F7992B21BDB2AB60028B227 /* AppDelegate.m in Sources */,
 				6F7992DD1BDB2DCE0028B227 /* RootNav.m in Sources */,
-				6F1720AD1BDBB42200D36D89 /* TextEditingView.m in Sources */,
+				6F52F26C1BE4AC430055DF9E /* TextEditingView.m in Sources */,
 				6F7992AF1BDB2AB60028B227 /* main.m in Sources */,
 				6F7992B51BDB2AB60028B227 /* SimpleNotes.xcdatamodeld in Sources */,
 				6F7992E01BDB2E150028B227 /* NoteLists.m in Sources */,
 				6F9056641BDFA226000A6840 /* dataBase.m in Sources */,
+				6FE11BEC1BE5B526007A5C76 /* NoteListsCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +333,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -334,7 +349,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -372,7 +387,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -388,6 +403,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SimpleNotes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Bj.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -401,6 +417,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SimpleNotes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Bj.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -420,6 +437,7 @@
 				);
 				INFOPLIST_FILE = SimpleNotesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Bj.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimpleNotes.app/SimpleNotes";
 			};
@@ -435,6 +453,7 @@
 				);
 				INFOPLIST_FILE = SimpleNotesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Bj.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimpleNotes.app/SimpleNotes";
 			};

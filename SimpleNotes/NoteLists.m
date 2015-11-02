@@ -8,8 +8,8 @@
 
 #import "NoteLists.h"
 #define MyColor1 [[UIColor alloc] initWithRed:(219.0/255) green:213.0/255 blue:188.0/255 alpha:1]
-#define MyColor2 [[UIColor alloc] initWithRed:(210.0/255) green:192.0/255 blue:122.0/255 alpha:1]
-
+#define MyColor2 [[UIColor alloc] initWithRed:(211.0/255) green:208.0/255 blue:172.0/255 alpha:1]
+#define TextColor [[UIColor alloc] initWithRed:139.0/255 green:139.0/255 blue:1.0/255 alpha:1]
 @interface NoteLists ()
 {
     
@@ -31,12 +31,12 @@
     [self loadData];
     self.view.tintColor = MyColor1;
     self.title = @"Notes List";
-    
+    self.
    // _searchDisplayController = [[UISearchDisplayController alloc] initWithSearchBar:_searchBar  contentsController:_noteLists];
     
     //设置搜索栏
     
-    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, [[UIApplication sharedApplication] statusBarFrame].size.height+self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, 45)];
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, [[UIApplication sharedApplication] statusBarFrame].size.height+self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, 45)];
     [self.view addSubview:_searchBar];
     _searchBar.placeholder = @"搜索";
     //_searchBar.prompt = @"搜索文本";
@@ -44,6 +44,7 @@
    // _searchBar.showsCancelButton = YES;
     _searchBar.showsScopeBar = YES;
     //_searchBar.scopeButtonTitles = [NSArray arrayWithObjects:@"singer",@"song",@"album", nil];
+    _searchBar.tintColor = TextColor;
     _searchBar.delegate = self;
     
     
@@ -65,8 +66,10 @@
     
     UIBarButtonItem * addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(rightTopButtonPushed)];
     self.navigationItem.rightBarButtonItem = addButton;
-    UIBarButtonItem * trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self  action:@selector(trashButtonPushed)];
+    UIBarButtonItem * trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self  action:@selector(trashButtonPush)];
     self.navigationItem.leftBarButtonItem = trashButton;
+    self.navigationController.navigationBar.barTintColor = MyColor1;
+    
     
     
     
@@ -122,11 +125,11 @@
         cell.backgroundColor = MyColor2;
     if(_searchStatus)
     {
-        [cell setContent:_searchList forRow:row];
+        [cell setContentAtRow:[[_searchList objectAtIndex:row] integerValue]];
     }
     else
     {
-        [cell setContent:_dataBase.totalData forRow:row];
+        [cell setContentAtRow:row];
     }
     NSLog(@"I Creat the number %d row\n",(int)row);
         
@@ -157,7 +160,9 @@
         _addButtonPushed = NO;
         
     }*/
-   
+    _searchStatus = NO;
+    [_searchBar resignFirstResponder];
+    [_searchBar setShowsCancelButton:NO animated:YES];
     TextEditingView *newTex = [[TextEditingView alloc] initWithFlag:-1];
             //newTex.flag = -1;
         //NSLog(@"%@",self.navigationController);
@@ -167,7 +172,7 @@
     
 }
 
-- (void) trashButtonPushed
+- (void) trashButtonPush
 {
     [_noteLists setEditing:YES animated:YES];
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPushed)];
@@ -208,8 +213,13 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
    // NSLog(@"%@",indexPath);
     if(editingStyle == UITableViewCellEditingStyleDelete)
     {
-        
-        [_dataBase.totalData removeObjectAtIndex:indexPath.row];
+        if(_searchStatus)
+        {
+            [_dataBase.totalData removeObjectAtIndex:[[_searchList objectAtIndex:indexPath.row] integerValue]];
+            [_searchList removeObjectAtIndex:indexPath.row];
+        }
+        else
+            [_dataBase.totalData removeObjectAtIndex:indexPath.row];
         NSLog(@"%@",_dataBase.totalData);
         //NSString *path = [[NSBundle mainBundle] pathForResource:@"NotesData" ofType:@"plist"];
         //[_data writeToFile:path atomically:YES];
@@ -277,7 +287,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
             range2 = [[dic objectForKey:@"content"] rangeOfString:searchText];
             if(!(range1.location == NSNotFound && range2.location == NSNotFound))
             {
-                [_searchList addObject:[_dataBase.totalData objectAtIndex:i]];
+                [_searchList addObject:[[NSNumber alloc] initWithInt:i]];
             }
             
         }
@@ -290,7 +300,6 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     [searchBar setShowsCancelButton:YES animated:YES];
-    _searchStatus = YES;
     // [_noteLists reloadData];
 }
 

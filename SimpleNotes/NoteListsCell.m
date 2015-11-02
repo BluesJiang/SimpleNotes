@@ -24,9 +24,10 @@
         _timeLabel.backgroundColor = [UIColor clearColor];
         _timeLabel.textColor = TextColor;
         _timeLabel.font = [UIFont  systemFontOfSize:10];
-        _timeLabel.minimumFontSize = 0;
         _timeLabel.textAlignment = NSTextAlignmentRight;
         [self addSubview:_timeLabel];
+        self.textLabel.font = [UIFont fontWithName:@"AppleGothic" size:[UIFont systemFontSize]];
+        self.detailTextLabel.font =[UIFont fontWithName:@"AppleGothic" size:[UIFont systemFontSize]];;
     }
     return self;
 }
@@ -47,11 +48,13 @@
         
 }
 
-- (void) setContent:(NSArray*) arr forRow:(NSInteger) row
+- (void) setContentAtRow:(NSInteger) row
 {
-    self.textLabel.text = [NSString stringWithFormat:@"%@",[[arr objectAtIndex:row] objectForKey:@"title"]];
-    self.detailTextLabel.text = [NSString stringWithFormat:@"%@",[[arr objectAtIndex:row] objectForKey:@"content"]];
-    [self setTime:[[arr objectAtIndex:row] objectForKey:@"time"]];
+    dataBase *data ;
+    data = [dataBase getDataBase];
+    self.textLabel.text = [NSString stringWithFormat:@"%@",[[data.totalData objectAtIndex:row] objectForKey:@"title"]];
+    self.detailTextLabel.text = [NSString stringWithFormat:@"%@",[[data.totalData objectAtIndex:row] objectForKey:@"content"]];
+    [self setTime:[[data.totalData objectAtIndex:row] objectForKey:@"time"]];
     self.textLabel.textAlignment = NSTextAlignmentCenter;
     
     self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

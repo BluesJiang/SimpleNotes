@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "dataBase.h"
 
 @interface NoteListsCell : UITableViewCell
 @property UILabel* timeLabel;
 - (void) setTime:(NSDate*) date;
-- (void) setContent:(NSArray*) arr forRow:(NSInteger) row;
+- (void) setContentAtRow:(NSInteger) row;
 
 
 @end
