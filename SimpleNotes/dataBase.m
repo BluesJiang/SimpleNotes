@@ -22,25 +22,29 @@ static dataBase * singleDataBase;
 
 - (void) initData
 {
-    /*NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * documentsDirectory = [paths objectAtIndex:0];
     
-    NSString *fileName = [documentsDirectory stringByAppendingPathComponent:@"Notes.plist"];*/
-    NSString* path = NSHomeDirectory();
-    NSString *fileName = [path stringByAppendingPathComponent:@"Documents/Notes.plist"];
+    NSString *fileName = [documentsDirectory stringByAppendingPathComponent:@"Notes.plist"];
+   // NSString* path = NSHomeDirectory();
+  //  NSString *fileName = [path stringByAppendingPathComponent:@"Documents/Notes.plist"];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSLog(@"%@",fileName);
     
-    if([fileManager fileExistsAtPath:fileName])
+    BOOL success = [fileManager fileExistsAtPath:fileName];
+    if(success)
     {
         _totalData = [NSMutableArray arrayWithContentsOfFile:fileName];
+        if(_totalData == nil)
+            _totalData = [[NSMutableArray alloc] init];
+            
 
     }
     else
     {
-        _totalData = [[NSMutableArray alloc] init];
+        
         [fileManager createFileAtPath:fileName contents:nil attributes:nil ];
-    
+        _totalData = [[NSMutableArray alloc] init];
     }
 
     
@@ -53,11 +57,11 @@ static dataBase * singleDataBase;
 
 - (void) saveData
 {
-//    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString * documentsDirectory = [paths objectAtIndex:0];
-//    NSString *fileName = [documentsDirectory stringByAppendingPathComponent:@"Notes.plist"];
-    NSString* path = NSHomeDirectory();
-    NSString *fileName = [path stringByAppendingPathComponent:@"Documents/Notes.plist"];
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * documentsDirectory = [paths objectAtIndex:0];
+    NSString *fileName = [documentsDirectory stringByAppendingPathComponent:@"Notes.plist"];
+//    NSString* path = NSHomeDirectory();
+//    NSString *fileName = [path stringByAppendingPathComponent:@"Documents/Notes.plist"];
 
     NSLog(@"%@",fileName);
     [_totalData writeToFile:fileName atomically:YES];

@@ -283,8 +283,8 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
         {
             NSDictionary *dic = [_dataBase.totalData objectAtIndex:i];
             NSRange range1,range2;
-            range1 = [[dic objectForKey:@"title"] rangeOfString:searchText];
-            range2 = [[dic objectForKey:@"content"] rangeOfString:searchText];
+            range1 = [[dic objectForKey:@"title"] rangeOfString:searchText options:NSCaseInsensitiveSearch];
+            range2 = [[dic objectForKey:@"content"] rangeOfString:searchText options:NSCaseInsensitiveSearch];
             if(!(range1.location == NSNotFound && range2.location == NSNotFound))
             {
                 [_searchList addObject:[[NSNumber alloc] initWithInt:i]];
