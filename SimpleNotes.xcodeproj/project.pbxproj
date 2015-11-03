@@ -19,7 +19,10 @@
 		6F7992DD1BDB2DCE0028B227 /* RootNav.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7992DC1BDB2DCE0028B227 /* RootNav.m */; };
 		6F7992E01BDB2E150028B227 /* NoteLists.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7992DF1BDB2E150028B227 /* NoteLists.m */; };
 		6F9056641BDFA226000A6840 /* dataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9056631BDFA226000A6840 /* dataBase.m */; };
+		6FC5B0111BE790EC00EE147D /* SearchNav.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC5B0101BE790EC00EE147D /* SearchNav.m */; };
+		6FC5B0141BE89B3C00EE147D /* NotesSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC5B0131BE89B3C00EE147D /* NotesSearchVC.m */; };
 		6FE11BEC1BE5B526007A5C76 /* NoteListsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE11BEB1BE5B526007A5C76 /* NoteListsCell.m */; };
+		6FE11BF11BE70E68007A5C76 /* NotesSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE11BF01BE70E68007A5C76 /* NotesSearchVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,8 +57,14 @@
 		6F7992DF1BDB2E150028B227 /* NoteLists.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteLists.m; sourceTree = "<group>"; };
 		6F9056621BDFA226000A6840 /* dataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dataBase.h; path = SimpleNotes.xcodeproj/../SimpleNotes/dataBase.h; sourceTree = "<group>"; };
 		6F9056631BDFA226000A6840 /* dataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = dataBase.m; path = SimpleNotes.xcodeproj/../SimpleNotes/dataBase.m; sourceTree = "<group>"; };
+		6FC5B00F1BE790EC00EE147D /* SearchNav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchNav.h; sourceTree = "<group>"; };
+		6FC5B0101BE790EC00EE147D /* SearchNav.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchNav.m; sourceTree = "<group>"; };
+		6FC5B0121BE89B3C00EE147D /* NotesSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesSearchVC.h; sourceTree = "<group>"; };
+		6FC5B0131BE89B3C00EE147D /* NotesSearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesSearchVC.m; sourceTree = "<group>"; };
 		6FE11BEA1BE5B526007A5C76 /* NoteListsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteListsCell.h; sourceTree = "<group>"; };
 		6FE11BEB1BE5B526007A5C76 /* NoteListsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteListsCell.m; sourceTree = "<group>"; };
+		6FE11BEF1BE70E68007A5C76 /* NotesSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesSearchVC.h; sourceTree = "<group>"; };
+		6FE11BF01BE70E68007A5C76 /* NotesSearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesSearchVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,16 +107,13 @@
 		6F7992AB1BDB2AB60028B227 /* SimpleNotes */ = {
 			isa = PBXGroup;
 			children = (
-				6F7992B01BDB2AB60028B227 /* AppDelegate.h */,
-				6F7992B11BDB2AB60028B227 /* AppDelegate.m */,
-				6F7992DE1BDB2E150028B227 /* NoteLists.h */,
-				6F7992DF1BDB2E150028B227 /* NoteLists.m */,
-				6FE11BEA1BE5B526007A5C76 /* NoteListsCell.h */,
-				6FE11BEB1BE5B526007A5C76 /* NoteListsCell.m */,
-				6F52F26A1BE4AC430055DF9E /* TextEditingView.h */,
-				6F52F26B1BE4AC430055DF9E /* TextEditingView.m */,
 				6F7992DB1BDB2DCE0028B227 /* RootNav.h */,
 				6F7992DC1BDB2DCE0028B227 /* RootNav.m */,
+				6F7992B01BDB2AB60028B227 /* AppDelegate.h */,
+				6F7992B11BDB2AB60028B227 /* AppDelegate.m */,
+				6FE11BEE1BE70DE9007A5C76 /* NoteLites */,
+				6F52F26A1BE4AC430055DF9E /* TextEditingView.h */,
+				6F52F26B1BE4AC430055DF9E /* TextEditingView.m */,
 				6F7992B91BDB2AB60028B227 /* Main.storyboard */,
 				6F7992BC1BDB2AB60028B227 /* Images.xcassets */,
 				6F7992BE1BDB2AB60028B227 /* LaunchScreen.xib */,
@@ -159,6 +165,23 @@
 			children = (
 			);
 			name = icon;
+			sourceTree = "<group>";
+		};
+		6FE11BEE1BE70DE9007A5C76 /* NoteLites */ = {
+			isa = PBXGroup;
+			children = (
+				6F7992DE1BDB2E150028B227 /* NoteLists.h */,
+				6F7992DF1BDB2E150028B227 /* NoteLists.m */,
+				6FC5B0121BE89B3C00EE147D /* NotesSearchVC.h */,
+				6FC5B0131BE89B3C00EE147D /* NotesSearchVC.m */,
+				6FE11BEA1BE5B526007A5C76 /* NoteListsCell.h */,
+				6FE11BEB1BE5B526007A5C76 /* NoteListsCell.m */,
+				6FE11BEF1BE70E68007A5C76 /* NotesSearchVC.h */,
+				6FE11BF01BE70E68007A5C76 /* NotesSearchVC.m */,
+				6FC5B00F1BE790EC00EE147D /* SearchNav.h */,
+				6FC5B0101BE790EC00EE147D /* SearchNav.m */,
+			);
+			name = NoteLites;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,12 +286,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FE11BF11BE70E68007A5C76 /* NotesSearchVC.m in Sources */,
 				6F7992B21BDB2AB60028B227 /* AppDelegate.m in Sources */,
 				6F7992DD1BDB2DCE0028B227 /* RootNav.m in Sources */,
 				6F52F26C1BE4AC430055DF9E /* TextEditingView.m in Sources */,
 				6F7992AF1BDB2AB60028B227 /* main.m in Sources */,
 				6F7992B51BDB2AB60028B227 /* SimpleNotes.xcdatamodeld in Sources */,
+				6FC5B0141BE89B3C00EE147D /* NotesSearchVC.m in Sources */,
 				6F7992E01BDB2E150028B227 /* NoteLists.m in Sources */,
+				6FC5B0111BE790EC00EE147D /* SearchNav.m in Sources */,
 				6F9056641BDFA226000A6840 /* dataBase.m in Sources */,
 				6FE11BEC1BE5B526007A5C76 /* NoteListsCell.m in Sources */,
 			);

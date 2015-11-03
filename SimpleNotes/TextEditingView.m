@@ -68,6 +68,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self registerForKeyboardNotification];
+    
+    self.navigationController.navigationBar.backgroundColor = MyColor2;
     self.view.backgroundColor = MyColor1;
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(finishedEditing)];
     self.navigationItem.rightBarButtonItem = doneButton;
@@ -102,6 +104,7 @@
     //NSLog(@"%@",_totalData);
     
     _dataBase = [dataBase getDataBase];
+    
     
     if(_flag >= 0)
     {

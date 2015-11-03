@@ -40,23 +40,7 @@
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    if([viewController isKindOfClass:[NoteLists class]])
-    {
-        //NSInteger num = _noteLists.data.count;
-        //[_noteLists loadData];
-        NSLog(@"%@",_noteLists.data);
-//        if (_dataBase.dataIncreased) {
-//            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-//            //[_noteLists.noteLists beginUpdates];
-//            //[_noteLists.noteLists setEditing:YES];
-//            
-//            [_noteLists.noteLists insertRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationAutomatic];
-//            _dataBase.dataIncreased = NO;
-//        }
-        [_noteLists.noteLists reloadData];
-        //[_noteLists.noteLists reloadData];
-        // [_noteLists.noteLists setEditing:NO];
-    }
+    
     
 
     
@@ -64,23 +48,7 @@
     
     
 }
-//- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
-//    if ([viewController isKindOfClass:[NoteLists class]]) {
-//        NSInteger num = _noteLists.data.count;
-//        [_noteLists loadData];
-//        NSLog(@"%@",_noteLists.data);
-//        if (num < _noteLists.data.count) {
-//            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-//            //[_noteLists.noteLists beginUpdates];
-//            //[_noteLists.noteLists setEditing:YES];
-//            [_noteLists.noteLists insertRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationAutomatic];
-//            
-//        }
-//        [_noteLists.noteLists reloadData];
-//        //[_noteLists.noteLists reloadData];
-//        // [_noteLists.noteLists setEditing:NO];
-//    }
-//}
+
 
 
 - (void)didReceiveMemoryWarning {

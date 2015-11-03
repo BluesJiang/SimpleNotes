@@ -19,6 +19,7 @@
 @property NSInteger numberOfRow;
 @property UISearchBar *searchBar;
 @property NSMutableArray *searchList;
+@property NotesSearchVC *searchViewController;
 //@property UISearchDisplayController* searchDisplayController;
 @property BOOL searchStatus;
 
@@ -26,18 +27,22 @@
 
 @implementation NoteLists
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [_noteLists reloadData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadData];
     self.view.tintColor = MyColor1;
     self.title = @"Notes List";
-    self.
    // _searchDisplayController = [[UISearchDisplayController alloc] initWithSearchBar:_searchBar  contentsController:_noteLists];
     
     //设置搜索栏
     
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, [[UIApplication sharedApplication] statusBarFrame].size.height+self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, 45)];
-    [self.view addSubview:_searchBar];
+   //[self.view addSubview:_searchBar];
     _searchBar.placeholder = @"搜索";
     //_searchBar.prompt = @"搜索文本";
     _searchBar.barStyle = UIBarStyleDefault;
@@ -48,9 +53,15 @@
     _searchBar.delegate = self;
     
     
+   
+    
+    
+    
+    
+    
     //设置表单
     
-    _noteLists = [[UITableView alloc] initWithFrame:CGRectMake(0, _searchBar.frame.origin.y+_searchBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+    _noteLists = [[UITableView alloc] initWithFrame:CGRectMake(0,0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
     _noteLists.backgroundColor = MyColor2;
     
     [_noteLists setDelegate:self];
@@ -61,6 +72,27 @@
     newFooterView.backgroundColor = MyColor1;
     //  newFooterView.backgroundColor = [UIColor whiteColor];
     _noteLists.tableFooterView = newFooterView;
+    
+    
+    //设置UISearchController
+    
+    //SearchNav *searchNav = [[SearchNav alloc] init];
+    SearchResultVC *searchResultVC = [[SearchResultVC alloc] init];
+     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:searchResultVC];
+    _searchViewController = [[NotesSearchVC alloc] initWithSearchResultsController:nav];
+    nav.view.tintColor = TextColor;
+    nav.view.backgroundColor = MyColor1;
+    _searchViewController.delegate = self;
+   
+    
+
+    _noteLists.tableHeaderView = _searchViewController.searchBar;
+    
+    
+    // _searchViewController.definesPresentationContext = YES;
+    
+    
+    
     
     //设置导航栏
     
@@ -123,14 +155,8 @@
         cell.backgroundColor = MyColor1;
     else
         cell.backgroundColor = MyColor2;
-    if(_searchStatus)
-    {
-        [cell setContentAtRow:[[_searchList objectAtIndex:row] integerValue]];
-    }
-    else
-    {
+    
         [cell setContentAtRow:row];
-    }
     NSLog(@"I Creat the number %d row\n",(int)row);
         
     
@@ -213,20 +239,15 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
    // NSLog(@"%@",indexPath);
     if(editingStyle == UITableViewCellEditingStyleDelete)
     {
-        if(_searchStatus)
-        {
-            [_dataBase.totalData removeObjectAtIndex:[[_searchList objectAtIndex:indexPath.row] integerValue]];
-            [_searchList removeObjectAtIndex:indexPath.row];
-        }
-        else
-            [_dataBase.totalData removeObjectAtIndex:indexPath.row];
+        
+        [_dataBase.totalData removeObjectAtIndex:indexPath.row];
         NSLog(@"%@",_dataBase.totalData);
         //NSString *path = [[NSBundle mainBundle] pathForResource:@"NotesData" ofType:@"plist"];
         //[_data writeToFile:path atomically:YES];
         [_dataBase saveData];
         
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationLeft];
-                //[_noteLists reloadData];
+        //[_noteLists reloadData];
        // [self loadData];
         NSLog(@"%@",_dataBase.totalData);
     }
@@ -242,6 +263,15 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
    // NSLog(@"%@",self);
     
 }
+
+
+//UISearchController Delegate
+- (void) willDismissSearchController:(UISearchController *)searchController
+{
+    [_noteLists reloadData];
+}
+
+
 
 
 
@@ -269,64 +299,6 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     
 }
 
-// SearchBar Delegate
-
-- (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-{
-    _searchStatus = YES;
-    if(_searchList){[_searchList removeAllObjects];_searchList = nil;}
-    if([searchText isEqualToString:@""])_searchStatus = NO;
-    if(_searchStatus)
-    {
-        _searchList= [[NSMutableArray alloc] init];
-        for(int i=0;i<_dataBase.totalData.count;i++)
-        {
-            NSDictionary *dic = [_dataBase.totalData objectAtIndex:i];
-            NSRange range1,range2;
-            range1 = [[dic objectForKey:@"title"] rangeOfString:searchText options:NSCaseInsensitiveSearch];
-            range2 = [[dic objectForKey:@"content"] rangeOfString:searchText options:NSCaseInsensitiveSearch];
-            if(!(range1.location == NSNotFound && range2.location == NSNotFound))
-            {
-                [_searchList addObject:[[NSNumber alloc] initWithInt:i]];
-            }
-            
-        }
- 
-    }
-    
-    [_noteLists reloadData];
-}
-
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
-{
-    [searchBar setShowsCancelButton:YES animated:YES];
-    // [_noteLists reloadData];
-}
-
-
-- (void) searchBarCancelButtonClicked:(UISearchBar *)searchBar
-{
-    [searchBar setShowsCancelButton:NO animated:YES];
-    [searchBar resignFirstResponder];
-    _searchStatus = NO;
-    if(![searchBar.text isEqualToString:@""])
-    {
-        [_noteLists reloadData];
-        searchBar.text = @"";
-    }
-    
-}
-
-- (void) searchBarSearchButtonClicked:(UISearchBar *)searchBar
-{
-    [searchBar resignFirstResponder];
-    if([searchBar.text isEqualToString:@""]) _searchStatus = NO;
-    
-    
-
-    
-    
-}
 
 /*
 #pragma mark - Navigation

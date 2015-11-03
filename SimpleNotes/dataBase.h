@@ -11,6 +11,7 @@
 @interface dataBase : NSObject
 
 @property (nonatomic,strong) NSMutableArray* totalData;
+@property (nonatomic) NSMutableArray* searchResult;
 //@property BOOL dataIncreased;
 
 - (void) initData;
